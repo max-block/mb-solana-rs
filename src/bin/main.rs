@@ -18,6 +18,7 @@ enum Commands {
     New(NewCommand),
     Private(PrivateCommand),
     Mnemonic(MnemonicCommand),
+    Balance(BalanceCommand),
 }
 
 /// Generate new keypair
@@ -43,6 +44,13 @@ struct MnemonicCommand {
     mnemonic: Option<String>,
 }
 
+/// Get SOL and SPL token balances for accounts
+#[derive(Parser)]
+struct BalanceCommand {
+    /// Path to the config file
+    config_path: String,
+}
+
 fn main() {
     let cli = Cli::parse();
 
@@ -55,6 +63,7 @@ fn main() {
             Commands::New(c) => cmd::new_cmd::run(c.limit, c.array),
             Commands::Private(c) => cmd::private_cmd::run(c.private_key),
             Commands::Mnemonic(c) => cmd::mnemonic_cmd::run(c.mnemonic),
+            Commands::Balance(c) => cmd::balance_cmd::run(c.config_path),
         }
     }
 }
