@@ -1,3 +1,3 @@
 mod account;
-mod balance;
+pub mod balance;
 pub mod cli;
