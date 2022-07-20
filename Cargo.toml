@@ -1,6 +1,6 @@
 [package]
 name = "mb-solana"
-version = "0.0.6"
+version = "0.0.7"
 edition = "2021"
 description = "my solana lib helpers and cli tools"
 license = "Unlicense"
@@ -10,13 +10,14 @@ name = "mb-solana"
 path = "src/bin/main.rs"
 
 [dependencies]
+anyhow = "1.0.58"
 clap = { version = "3.1.18", features = ["derive", "cargo"] }
 clap_complete = "3.1.4"
 colored_json = "2.1.0"
 dotenv = "0.15.0"
 itertools = "0.10.3"
 rand = "0.8.5"
-reqwest = { version = "0.11.10", features = ["json"] }
+reqwest = { version = "0.11.10", features = ["json", "socks"] }
 rpassword = "6.0.1"
 rust_decimal = "1.24.0"
 serde = { version = "1.0.137", features = ["derive"] }
@@ -26,3 +27,11 @@ solana-client = "1.10.24"
 solana-sdk = "1.10.24"
 tiny-bip39 = "0.8.2"
 typed-builder = "0.10.0"
+tokio = { version = "^1", features = ["full"] }
+
+[dev-dependencies]
+dotenv = "0.15.0"
+lazy_static = "1.4.0"
+once_cell = "1.13.0"
+rstest = "0.15.0"
+
