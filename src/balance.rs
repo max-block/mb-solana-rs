@@ -1,4 +1,4 @@
-use rand::prelude::SliceRandom;
+use rand::{prelude::{SliceRandom, StdRng}, SeedableRng};
 use rust_decimal::Decimal;
 use tokio::runtime::Builder;
 use typed_builder::TypedBuilder;
@@ -41,7 +41,7 @@ pub struct SplTokenBalanceParams {
 }
 
 pub async fn sol_balance(params: SolBalanceParams) -> Option<u64> {
-    let mut rng = rand::thread_rng();
+    let mut rng = StdRng::from_entropy();
     for _ in 0..params.attempts {
         let node = params.nodes.choose(&mut rng).unwrap();
         let proxy = params.proxies.choose(&mut rng).map(|p| p.as_str());
@@ -57,7 +57,7 @@ pub fn sol_balance_sync(params: SolBalanceParams) -> Option<u64> {
 }
 
 pub async fn spl_token_balance(params: SplTokenBalanceParams) -> Option<Decimal> {
-    let mut rng = rand::thread_rng();
+    let mut rng = StdRng::from_entropy();
     for _ in 0..params.attempts {
         let node = params.nodes.choose(&mut rng).unwrap();
         let proxy = params.proxies.choose(&mut rng).map(|p| p.as_str());
